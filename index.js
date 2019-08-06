@@ -9,7 +9,7 @@ var loggedIn = false;
 //Initialise postgres client
 const url = require('url');
 
-//check to see if we have this heroku environment variable
+// check to see if we have this heroku environment variable
 if( process.env.DATABASE_URL ){
 
   //we need to take apart the url so we can set the appropriate configs
@@ -29,12 +29,12 @@ if( process.env.DATABASE_URL ){
 
 }else{
 
-  //otherwise we are on the local network
-      const configs = {
+  // otherwise we are on the local network
+      var configs = {
         user: 'ben',
         host: '127.0.0.1',
         database: 'proj2',
-        port: 5432,
+        port: 5432
     };
 }
 const pool = new pg.Pool(configs);
@@ -132,8 +132,9 @@ app.post('/login', (request, response)=>{
     let values = [request.body.username];
     let userName = request.body.username;
     console.log("value is "+values);
-    const queryString = "SELECT password FROM allusers WHERE user_name=$1";
+    const queryString = "SELECT password FROM allusers WHERE user_name = $1";
     pool.query(queryString, values, (err, result)=>{
+        console.log("result is "+result);
         if (err) {
             console.log('query login error:', err.stack);
             response.send('query error');

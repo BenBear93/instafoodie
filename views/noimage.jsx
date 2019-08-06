@@ -18,7 +18,7 @@ class Noimage extends React.Component {
                         FOODIE
                       </a>
                       <form className="form-inline">
-                          <a className="x" href={"/user"+userId}>
+                          <a className="x" href={"/user/"+userId}>
                             <button className="btn btn-outline-light mr-2" type="button">{userId}</button>
                           </a>
                           <a className="y" href="/logout">
