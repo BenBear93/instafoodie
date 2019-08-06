@@ -98,9 +98,10 @@ app.post('/user/:user_name/add', (request, response)=>{
     });
 });
 app.get('/user/:user_name/add', (request, response)=>{
-    let values = [request.params.user_name];
+    let values = [request.cookies.userid];
     const queryString = "SELECT allusers.user_name, allusers.id from allusers WHERE allusers.user_name =$1"
     pool.query(queryString, values, (err,result)=>{
+        console.log("result is "+result);
         if (err) {
             console.log('query new photo get error:', err.stack);
             response.send('query error');
